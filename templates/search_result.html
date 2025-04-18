@@ -1,0 +1,56 @@
+<!-- templates/search_results.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Search Results</title>
+</head>
+<body>
+    <h1>Search Results</h1>
+    <table>
+        <tr>
+            <th>Policy #</th>
+            <th>Customer ID</th>
+            <th>Type</th>
+            <th>Premium</th>
+            <th>Start Date</th>
+            <th>Status</th>
+        </tr>
+        {% for policy in policies %}
+        <tr>
+            <td>{{ policy.policy_number }}</td>
+            <td>{{ policy.customer_id }}</td>
+            <td>{{ policy.insurance_type }}</td>
+            <td>${{ "%.2f"|format(policy.premium) }}</td>
+            <td>{{ policy.start_date }}</td>
+            <td>{{ policy.status }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
+
+<!-- templates/stats.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Policy Stats</title>
+</head>
+<body>
+    <h1>Policy Stats</h1>
+    <table>
+        <tr>
+            <th>Insurance Type</th>
+            <th>Total Policies</th>
+            <th>Average Premium</th>
+        </tr>
+        {% for stat in stats %}
+        <tr>
+            <td>{{ stat.insurance_type }}</td>
+            <td>{{ stat.total_policies }}</td>
+            <td>${{ "%.2f"|format(stat.avg_premium) }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
+

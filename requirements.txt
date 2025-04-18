@@ -1,0 +1,5 @@
+Flask
+Flask
+Flask-SQLAlchemy
+Flask-WTF  # For form security
+Flask-Login

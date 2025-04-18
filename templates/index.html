@@ -1,0 +1,64 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Insurance Admin</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <h1>Insurance Policy Management</h1>
+
+    <!-- Add Policy Form -->
+    <div class="form-container">
+        <h2>Add New Policy</h2>
+        <form method="POST" action="{{ url_for('add_policy') }}">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <label>Policy Number: <input type="text" name="policy_number" required></label>
+            <label>Customer ID: <input type="text" name="customer_id" required></label>
+            <label>Insurance Type: 
+                <select name="insurance_type">
+                    <option value="Auto">Auto</option>
+                    <option value="Home">Home</option>
+                    <option value="Life">Life</option>
+                </select>
+            </label>
+            <label>Premium ($): <input type="number" step="0.01" name="premium" required></label>
+            <label>Start Date: <input type="date" name="start_date" required></label>
+            <label>End Date: <input type="date" name="end_date"></label>
+            <button type="submit">Save Policy</button>
+        </form>
+    </div>
+
+    <!-- Policy List -->
+    <div class="policy-list">
+        <h2>Existing Policies</h2>
+        <table>
+            <tr>
+                <th>Policy #</th>
+                <th>Customer ID</th>
+                <th>Type</th>
+                <th>Premium</th>
+                <th>Start Date</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+            {% for policy in policies %}
+            <tr>
+                <td>{{ policy.policy_number }}</td>
+                <td>{{ policy.customer_id }}</td>
+                <td>{{ policy.insurance_type }}</td>
+                <td>${{ "%.2f"|format(policy.premium) }}</td>
+                <td>{{ policy.start_date }}</td>
+                <td>{{ policy.status }}</td>
+                <td>
+                    <form method="POST" action="{{ url_for('delete_policy', policy_id=policy.id) }}">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Policy Details</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <h1>Policy Details: {{ policy.policy_number }}</h1>
+    <div class="policy-details">
+        <p><strong>Customer ID:</strong> {{ policy.customer_id }}</p>
+        <p><strong>Type:</strong> {{ policy.insurance_type }}</p>
+        <p><strong>Premium:</strong> ${{ "%.2f"|format(policy.premium) }}</p>
+        <p><strong>Start Date:</strong> {{ policy.start_date }}</p>
+        <p><strong>End Date:</strong> {{ policy.end_date }}</p>
+        <p><strong>Status:</strong> {{ policy.status }}</p>
+    </div>
+    <a href="{{ url_for('get_policy_by_id', policy_id=policy.id) }}">View Policy</a>
+</body>
+</html>
