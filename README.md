@@ -1,5 +1,5 @@
 # insurance-flask-app
 
-__For testing__
+__For testing && Training__
 
-    Mostley written by AI
+
